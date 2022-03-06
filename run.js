@@ -309,6 +309,11 @@ const bodyEl = document.querySelector('body');
 // bodyEl.setAttribute("onchange","addevent()")
 bodyEl.setAttribute("onclick","addevent()")
 
+// const backbutton = bodyEl.querySelectorAll('[ng-click="uActNaviBack()"]')
+// backbutton.setAttribute("onclick","back()")
+
+
+
 
 function addevent(){
 
@@ -536,7 +541,9 @@ function checked(id, this_id) {
     document.querySelector(selector2).value = document.querySelector(selector1).value;
 }
 
-
+function back() {
+    document.querySelector("div#external_html > input:check").checked = false;
+}
 
 
 
@@ -545,13 +552,44 @@ function addstyle(){
     const nw_node = document.createElement("style");
     nw_node.innerHTML = `
 
+
+        
+    /* width */
+    ::-webkit-scrollbar {
+    width: 10px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 15px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    }
+
     div#external_html * {
         transition: 0.3s;
     }
 
     div#external_html > input:checked + div {
-        opacity: 1;
+        opacity: 0.97;
         visibility: visible;
+    }
+
+    div#external_html > input:checked + div::before {
+        content: " X ";
+        position: absolute;
+        top: 1em;
+        right: 15px;
+        font-weight: 900;
     }
 
     div#external_html > input + div {
@@ -560,13 +598,12 @@ function addstyle(){
         visibility: hidden;
         opacity: 0;
         left: 0vw;
-        top: 3.05em;
+        top: 0;
         height: 100vh;
         width: 100vw;
         background: white;
         overflow-y: scroll;
-        padding: 10px;
-        padding-bottom: 90px;
+        padding: 50px 10px;
     }
 
 
