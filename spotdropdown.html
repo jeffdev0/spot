@@ -1,0 +1,396 @@
+<html ng-app="ionicApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title>Ionic Modal</title>
+  <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
+  <script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
+</head>
+<body ng-controller="AppCtrl">
+  <ion-header-bar class="bar-positive">
+    <h1 class="title">Profil</h1>
+    <div class="buttons">
+    </div>
+  </ion-header-bar>
+  <ion-content>
+<form class="list ng-pristine ng-valid">
+				 <!--group-->
+				 <ion-item class="item-icon-right positive item">
+				 Kumpulan
+				 <input ng-model="recoEdit.level" type="text" style="width: 220px;" class="ng-pristine ng-valid ng-not-empty ng-touched">
+			   <i class="icon ion-compose" ng-click="UserProfile.task('group')"></i>        
+				 </ion-item>
+				 <!--refr-->
+				 <ion-item class="item-icon-right positive item">
+				 Tahap
+				 <input ng-model="recoEdit.topic" type="text" style="width: 220px;" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+			   <i class="icon ion-compose" ng-click="UserProfile.task('level')"></i>        
+				 </ion-item>
+				 <!--state-->
+				 <ion-item class="item-icon-right positive item">
+				 Negeri
+				 <input ng-model="recoEdit.desc" type="text" style="width: 220px;" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+			   <i class="icon ion-compose" ng-click="UserProfile.task('state')"></i>        
+				 </ion-item>
+  				 <!--area-->
+				 <ion-item class="item-icon-right positive item">
+				 Kawasan
+				 <input ng-model="recoEdit.desc" type="text" style="width: 220px;" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+			   <i class="icon ion-compose" ng-click="UserProfile.task('area')"></i>        
+				 </ion-item>
+		  </form>
+  </ion-content>
+
+  <script id="templates/modal.html" type="text/ng-template">
+    <ion-modal-view>
+      <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">Select</h1>
+        <button class="button button-clear button-primary" ng-click="userProfile.task.cancel()">Cancel</button>
+      </ion-header-bar>
+      <ion-content class="padding">
+     <form class="list" name="formUserProfile">         
+       <ion-list>
+        <ion-item ng-repeat="item in userProfile.items"ng-click="" >
+          <h3>{{item.name}}</h3>
+        </ion-item>   
+   </ion-list>
+        </form>
+      </ion-content>
+    </ion-modal-view>
+  </script>
+  <script>
+    angular.module('ionicApp', ['ionic'])
+      .controller('AppCtrl', function($scope, $ionicModal, UserProfile) {
+      $scope.UserProfile={}
+        $scope.UserProfile.task = function(option) {
+          console.log("option:",option);
+          UserProfile.task($scope, option)
+        }
+        $scope.imgUser = "";
+      })
+      .service("UserProfile",
+        function($ionicModal) {
+          var that = this; /*use that var to avoid internal conflict*/
+          this.task = function(scope, option) {
+            scope.userProfile={};
+            scope.userProfile.form={
+              name:"a"
+            }
+            scope.userProfile.task={}
+            
+scope.userProfile.group=[
+    
+    {'ctgy':'group','name':'Usrah Gabungan Majlis Nuqaba\' PAS Pusat'},
+    {'ctgy':'group','name':'Usrah Majlis Nuqaba\' Dewan  Pemuda PAS Malaysia (DPPM)'},
+    {'ctgy':'group','name':'Usrah Majlis Naqibat Dewan Muslimat PAS Malaysia (DMPM)'},
+    {'ctgy':'group','name':'Usrah Majlis Nuqaba\' PAS Negeri'},
+    {'ctgy':'group','name':'Usrah Majlis Nuqaba\' DPPN'},
+    {'ctgy':'group','name':'Usrah Majlis Naqibat DMPN (Naqibatun Naqibat)'},
+    {'ctgy':'group','name':'Usrah Majlis Nuqaba\' PAS Kawasan'},
+    {'ctgy':'group','name':'Usrah Majlis Naqibat DMPK'},
+    {'ctgy':'group','name':'Usrah Qiyadi PAS Pusat'},
+    {'ctgy':'group','name':'Usrah Qiyadi Dewan Ulama PAS Pusat'},
+    {'ctgy':'group','name':'Usrah Qiyadi Dewan Pemuda PAS Malaysia'},
+    {'ctgy':'group','name':'Usrah Qiyadi Dewan Muslimat PAS Malaysia'},
+    {'ctgy':'group','name':'Usrah Qiyadi Badan Perhubungan PAS Negeri/WP'},
+    {'ctgy':'group','name':'Usrah Qiyadi Dewan Ulama PAS Negeri'},
+    {'ctgy':'group','name':'Usrah Qiyadi Dewan Pemuda PAS Negeri'},
+    {'ctgy':'group','name':'Usrah Qiyadi Dewan Muslimat PAS Negeri'},
+    {'ctgy':'group','name':'Usrah Qiyadi PAS Kawasan'},
+    {'ctgy':'group','name':'Usrah Qiyadi Dewan Ulama PAS Kawasan'},
+    {'ctgy':'group','name':'Usrah Qiyadi Dewan Pemuda PAS Kawasan'},
+    {'ctgy':'group','name':'Usrah Qiyadi Dewan Muslimat PAS Kawasan'},
+    {'ctgy':'group','name':'Usrah Qiyadi PAS Cawangan'},
+    {'ctgy':'group','name':'Usrah Qiyadi Pemuda Cawangan'},
+    {'ctgy':'group','name':'Usrah Qiyadi Muslimat PAS Cawangan'},
+    {'ctgy':'group','name':'Usrah Ahli PAS Cawangan'},
+    {'ctgy':'group','name':'Usrah Ahli Pemuda PAS Cawangan'},
+    {'ctgy':'group','name':'Usrah Ahli Muslimat Cawangan'},
+    {'ctgy':'group','name':'Usrah Alumni'},
+    {'ctgy':'group','name':'Usrah NGO'},
+    {'ctgy':'group','name':'Usrah Artis'},
+    {'ctgy':'group','name':'Lain-lain Usrah Ahli'}
+
+  ];
+        
+scope.userProfile.level=[
+  {'ctgy':'level','name':'TAARIF 1'},
+  {'ctgy':'level','name':'TAARIF 2'},
+  {'ctgy':'level','name':'TAKWIN 1'},
+  {'ctgy':'level','name':'TAKWIN 2'},
+  {'ctgy':'level','name':'TANFIZ 1'},
+  {'ctgy':'level','name':'TANFIZ 2'},
+  {'ctgy':'level','name':'NUQABA\''}
+]; 
+
+scope.userProfile.state=[
+  {'ctgy':'state','name':'Johor'},
+  {'ctgy':'state','name':'Kedah'},
+  {'ctgy':'state','name':'Kelantan'},
+  {'ctgy':'state','name':'Malaka'},
+  {'ctgy':'state','name':'Negeri Sembilan'},
+  {'ctgy':'state','name':'Pahang'},
+  {'ctgy':'state','name':'P.Pinang'},
+  {'ctgy':'state','name':'Perak'},
+  {'ctgy':'state','name':'Perlis'},
+  {'ctgy':'state','name':'Sabah'},
+  {'ctgy':'state','name':'Sarawak'},
+  {'ctgy':'state','name':'Selangor'},
+  {'ctgy':'state','name':'Terengganu'},
+  {'ctgy':'state','name':'Wilayah Persekutuan'}
+  
+];                 
+            
+  scope.userProfile.area=[
+    {'ctgy':'area','state':'Perlis','name':'Padang Besar'},
+    {'ctgy':'area','state':'Perlis','name':'Kangar'},
+    {'ctgy':'area','state':'Perlis','name':'Arau'},
+    {'ctgy':'area','state':'Kedah','name':'Langkawi'},
+    {'ctgy':'area','state':'Kedah','name':'Jerlun'},
+    {'ctgy':'area','state':'Kedah','name':'Kubang Pasu'},
+    {'ctgy':'area','state':'Kedah','name':'Padang Terap'},
+    {'ctgy':'area','state':'Kedah','name':'Pokok Sena'},
+    {'ctgy':'area','state':'Kedah','name':'Alor Setar'},
+    {'ctgy':'area','state':'Kedah','name':'Kuala Kedah'},
+    {'ctgy':'area','state':'Kedah','name':'Pendang'},
+    {'ctgy':'area','state':'Kedah','name':'Jerai'},
+    {'ctgy':'area','state':'Kedah','name':'Sik'},
+    {'ctgy':'area','state':'Kedah','name':'Merbok'},
+    {'ctgy':'area','state':'Kedah','name':'Sungai Petani'},
+    {'ctgy':'area','state':'Kedah','name':'Baling'},
+    {'ctgy':'area','state':'Kedah','name':'Padang Serai'},
+    {'ctgy':'area','state':'Kedah','name':'Kulim-Bandar Baharu'},
+    {'ctgy':'area','state':'Kelantan','name':'Tumpat'},
+    {'ctgy':'area','state':'Kelantan','name':'Pengkalan Chepa'},
+    {'ctgy':'area','state':'Kelantan','name':'Kota Bharu'},
+    {'ctgy':'area','state':'Kelantan','name':'Pasir Mas'},
+    {'ctgy':'area','state':'Kelantan','name':'Rantau Panjang'},
+    {'ctgy':'area','state':'Kelantan','name':'Kubang Kerian'},
+    {'ctgy':'area','state':'Kelantan','name':'Bachok'},
+    {'ctgy':'area','state':'Kelantan','name':'Ketereh'},
+    {'ctgy':'area','state':'Kelantan','name':'Tanah Merah'},
+    {'ctgy':'area','state':'Kelantan','name':'Pasir Puteh'},
+    {'ctgy':'area','state':'Kelantan','name':'Machang'},
+    {'ctgy':'area','state':'Kelantan','name':'Jeli'},
+    {'ctgy':'area','state':'Kelantan','name':'Kuala Krai'},
+    {'ctgy':'area','state':'Kelantan','name':'Gua Musang'},
+    {'ctgy':'area','state':'Terengganu','name':'Besut'},
+    {'ctgy':'area','state':'Terengganu','name':'Setiu'},
+    {'ctgy':'area','state':'Terengganu','name':'Kuala Nerus'},
+    {'ctgy':'area','state':'Terengganu','name':'Kuala Terengganu'},
+    {'ctgy':'area','state':'Terengganu','name':'Marang'},
+    {'ctgy':'area','state':'Terengganu','name':'Hulu Terengganu'},
+    {'ctgy':'area','state':'Terengganu','name':'Dungun'},
+    {'ctgy':'area','state':'Terengganu','name':'Kemaman'},
+    {'ctgy':'area','state':'P.Pinang','name':'Kepala Batas'},
+    {'ctgy':'area','state':'P.Pinang','name':'Tasek Gelugor'},
+    {'ctgy':'area','state':'P.Pinang','name':'Bagan'},
+    {'ctgy':'area','state':'P.Pinang','name':'Permatang Pauh'},
+    {'ctgy':'area','state':'P.Pinang','name':'Bukit Mertajam'},
+    {'ctgy':'area','state':'P.Pinang','name':'Batu Kawan'},
+    {'ctgy':'area','state':'P.Pinang','name':'Nibong Tebal'},
+    {'ctgy':'area','state':'P.Pinang','name':'Bukit Bendera'},
+    {'ctgy':'area','state':'P.Pinang','name':'Tanjong'},
+    {'ctgy':'area','state':'P.Pinang','name':'Jelutong'},
+    {'ctgy':'area','state':'P.Pinang','name':'Bukit Gelugor'},
+    {'ctgy':'area','state':'P.Pinang','name':'Bayan Baru'},
+    {'ctgy':'area','state':'P.Pinang','name':'Balik Pulau'},
+    {'ctgy':'area','state':'Perak','name':'Gerik'},
+    {'ctgy':'area','state':'Perak','name':'Lenggong'},
+    {'ctgy':'area','state':'Perak','name':'Larut'},
+    {'ctgy':'area','state':'Perak','name':'Parit Buntar'},
+    {'ctgy':'area','state':'Perak','name':'Bagan Serai'},
+    {'ctgy':'area','state':'Perak','name':'Bukit Gantang'},
+    {'ctgy':'area','state':'Perak','name':'Taiping'},
+    {'ctgy':'area','state':'Perak','name':'Padang Rengas'},
+    {'ctgy':'area','state':'Perak','name':'Sungai Siput'},
+    {'ctgy':'area','state':'Perak','name':'Tambun'},
+    {'ctgy':'area','state':'Perak','name':'Ipoh Timor'},
+    {'ctgy':'area','state':'Perak','name':'Ipoh Barat'},
+    {'ctgy':'area','state':'Perak','name':'Batu Gajah'},
+    {'ctgy':'area','state':'Perak','name':'Kuala Kangsar'},
+    {'ctgy':'area','state':'Perak','name':'Beruas'},
+    {'ctgy':'area','state':'Perak','name':'Parit'},
+    {'ctgy':'area','state':'Perak','name':'Kampar'},
+    {'ctgy':'area','state':'Perak','name':'Gopeng'},
+    {'ctgy':'area','state':'Perak','name':'Tapah'},
+    {'ctgy':'area','state':'Perak','name':'Pasir Salak'},
+    {'ctgy':'area','state':'Perak','name':'Lumut'},
+    {'ctgy':'area','state':'Perak','name':'Bagan Datuk'},
+    {'ctgy':'area','state':'Perak','name':'Teluk Intan'},
+    {'ctgy':'area','state':'Perak','name':'Tanjung Malim'},
+    {'ctgy':'area','state':'Pahang','name':'Cameron Highlands'},
+    {'ctgy':'area','state':'Pahang','name':'Lipis'},
+    {'ctgy':'area','state':'Pahang','name':'Raub'},
+    {'ctgy':'area','state':'Pahang','name':'Jerantut'},
+    {'ctgy':'area','state':'Pahang','name':'Indera Mahkota'},
+    {'ctgy':'area','state':'Pahang','name':'Kuantan'},
+    {'ctgy':'area','state':'Pahang','name':'Paya Besar'},
+    {'ctgy':'area','state':'Pahang','name':'Pekan'},
+    {'ctgy':'area','state':'Pahang','name':'Maran'},
+    {'ctgy':'area','state':'Pahang','name':'Kuala Krau'},
+    {'ctgy':'area','state':'Pahang','name':'Temerloh'},
+    {'ctgy':'area','state':'Pahang','name':'Bentong'},
+    {'ctgy':'area','state':'Pahang','name':'Bera'},
+    {'ctgy':'area','state':'Pahang','name':'Rompin'},
+    {'ctgy':'area','state':'Selangor','name':'Sabak Bernam'},
+    {'ctgy':'area','state':'Selangor','name':'Sungai Besar'},
+    {'ctgy':'area','state':'Selangor','name':'Hulu Selangor'},
+    {'ctgy':'area','state':'Selangor','name':'Tanjong Karang'},
+    {'ctgy':'area','state':'Selangor','name':'Kuala Selangor'},
+    {'ctgy':'area','state':'Selangor','name':'Selayang'},
+    {'ctgy':'area','state':'Selangor','name':'Gombak'},
+    {'ctgy':'area','state':'Selangor','name':'Ampang'},
+    {'ctgy':'area','state':'Selangor','name':'Pandan'},
+    {'ctgy':'area','state':'Selangor','name':'Hulu Langat'},
+    {'ctgy':'area','state':'Selangor','name':'Bangi'},
+    {'ctgy':'area','state':'Selangor','name':'Puchong'},
+    {'ctgy':'area','state':'Selangor','name':'Subang'},
+    {'ctgy':'area','state':'Selangor','name':'Petaling Jaya'},
+    {'ctgy':'area','state':'Selangor','name':'Damansara'},
+    {'ctgy':'area','state':'Selangor','name':'Sungai Buloh'},
+    {'ctgy':'area','state':'Selangor','name':'Shah Alam'},
+    {'ctgy':'area','state':'Selangor','name':'Kapar'},
+    {'ctgy':'area','state':'Selangor','name':'Klang'},
+    {'ctgy':'area','state':'Selangor','name':'Kota Raja'},
+    {'ctgy':'area','state':'Selangor','name':'Kuala Langat'},
+    {'ctgy':'area','state':'Selangor','name':'Sepang'},
+    {'ctgy':'area','state':'Wilayah Persekutuan','name':'Kepong'},
+    {'ctgy':'area','state':'Wilayah Persekutuan','name':'Batu'},
+    {'ctgy':'area','state':'Wilayah Persekutuan','name':'Wangsa Maju'},
+    {'ctgy':'area','state':'Wilayah Persekutuan','name':'Segambut'},
+    {'ctgy':'area','state':'Wilayah Persekutuan','name':'Setiawangsa'},
+    {'ctgy':'area','state':'Wilayah Persekutuan','name':'Titiwangsa'},
+    {'ctgy':'area','state':'Wilayah Persekutuan','name':'Bukit Bintang'},
+    {'ctgy':'area','state':'Wilayah Persekutuan','name':'Lembah Pantai'},
+    {'ctgy':'area','state':'Wilayah Persekutuan','name':'Seputeh'},
+    {'ctgy':'area','state':'Wilayah Persekutuan','name':'Cheras'},
+    {'ctgy':'area','state':'Wilayah Persekutuan','name':'Bandar Tun Razak'},
+    {'ctgy':'area','state':'Wilayah Persekutuan','name':'Labuan'},
+    {'ctgy':'area','state':'Wilayah Persekutuan','name':'Putrajaya'},
+    {'ctgy':'area','state':'Negeri Sembilan','name':'Jelebu'},
+    {'ctgy':'area','state':'Negeri Sembilan','name':'Jempol'},
+    {'ctgy':'area','state':'Negeri Sembilan','name':'Seremban'},
+    {'ctgy':'area','state':'Negeri Sembilan','name':'Kuala Pilah'},
+    {'ctgy':'area','state':'Negeri Sembilan','name':'Rasah'},
+    {'ctgy':'area','state':'Negeri Sembilan','name':'Rembau'},
+    {'ctgy':'area','state':'Negeri Sembilan','name':'Port Dickson'},
+    {'ctgy':'area','state':'Negeri Sembilan','name':'Tampin'},
+    {'ctgy':'area','state':'Melaka','name':'Masjid Tanah'},
+    {'ctgy':'area','state':'Melaka','name':'Alor Gajah'},
+    {'ctgy':'area','state':'Melaka','name':'Tangga Batu'},
+    {'ctgy':'area','state':'Melaka','name':'Hang Tuah Jaya'},
+    {'ctgy':'area','state':'Melaka','name':'Kota Melaka'},
+    {'ctgy':'area','state':'Melaka','name':'Jasin'},
+    {'ctgy':'area','state':'Johor','name':'Segamat'},
+    {'ctgy':'area','state':'Johor','name':'Sekijang'},
+    {'ctgy':'area','state':'Johor','name':'Labis'},
+    {'ctgy':'area','state':'Johor','name':'Pagoh'},
+    {'ctgy':'area','state':'Johor','name':'Ledang'},
+    {'ctgy':'area','state':'Johor','name':'Bakri'},
+    {'ctgy':'area','state':'Johor','name':'Muar'},
+    {'ctgy':'area','state':'Johor','name':'Parit Sulong'},
+    {'ctgy':'area','state':'Johor','name':'Ayer Hitam'},
+    {'ctgy':'area','state':'Johor','name':'Sri Gading'},
+    {'ctgy':'area','state':'Johor','name':'Batu Pahat'},
+    {'ctgy':'area','state':'Johor','name':'Simpang Renggam'},
+    {'ctgy':'area','state':'Johor','name':'Kluang'},
+    {'ctgy':'area','state':'Johor','name':'Sembrong'},
+    {'ctgy':'area','state':'Johor','name':'Mersing'},
+    {'ctgy':'area','state':'Johor','name':'Tenggara'},
+    {'ctgy':'area','state':'Johor','name':'Kota Tinggi'},
+    {'ctgy':'area','state':'Johor','name':'Pengerang'},
+    {'ctgy':'area','state':'Johor','name':'Tebrau'},
+    {'ctgy':'area','state':'Johor','name':'Pasir Gudang'},
+    {'ctgy':'area','state':'Johor','name':'Johor Bahru'},
+    {'ctgy':'area','state':'Johor','name':'Pulai'},
+    {'ctgy':'area','state':'Johor','name':'Iskandar Puteri'},
+    {'ctgy':'area','state':'Johor','name':'Kulai'},
+    {'ctgy':'area','state':'Johor','name':'Pontian'},
+    {'ctgy':'area','state':'Johor','name':'Tanjung Piai'},
+    {'ctgy':'area','state':'Sarawak','name':'Kudat'},
+    {'ctgy':'area','state':'Sarawak','name':'Kota Marudu'},
+    {'ctgy':'area','state':'Sarawak','name':'Kota Belud'},
+    {'ctgy':'area','state':'Sarawak','name':'Tuaran'},
+    {'ctgy':'area','state':'Sarawak','name':'Sepanggar'},
+    {'ctgy':'area','state':'Sarawak','name':'Kota Kinabalu'},
+    {'ctgy':'area','state':'Sarawak','name':'Putatan'},
+    {'ctgy':'area','state':'Sarawak','name':'Penampang'},
+    {'ctgy':'area','state':'Sarawak','name':'Papar'},
+    {'ctgy':'area','state':'Sarawak','name':'Kimanis'},
+    {'ctgy':'area','state':'Sarawak','name':'Beaufort'},
+    {'ctgy':'area','state':'Sarawak','name':'Sipitang'},
+    {'ctgy':'area','state':'Sarawak','name':'Ranau'},
+    {'ctgy':'area','state':'Sarawak','name':'Keningau'},
+    {'ctgy':'area','state':'Sarawak','name':'Tenom'},
+    {'ctgy':'area','state':'Sarawak','name':'Pensiangan'},
+    {'ctgy':'area','state':'Sarawak','name':'Beluran'},
+    {'ctgy':'area','state':'Sarawak','name':'Libaran'},
+    {'ctgy':'area','state':'Sarawak','name':'Batu Sapi'},
+    {'ctgy':'area','state':'Sarawak','name':'Sandakan'},
+    {'ctgy':'area','state':'Sarawak','name':'Kinabatangan'},
+    {'ctgy':'area','state':'Sarawak','name':'Lahad Datu'},
+    {'ctgy':'area','state':'Sarawak','name':'Semporna'},
+    {'ctgy':'area','state':'Sarawak','name':'Tawau'},
+    {'ctgy':'area','state':'Sarawak','name':'Kalabakan'},
+    {'ctgy':'area','state':'Sabah','name':'Mas Gading'},
+    {'ctgy':'area','state':'Sabah','name':'Santubong'},
+    {'ctgy':'area','state':'Sabah','name':'Petra Jaya'},
+    {'ctgy':'area','state':'Sabah','name':'Bandar Kuching'},
+    {'ctgy':'area','state':'Sabah','name':'Stampin'},
+    {'ctgy':'area','state':'Sabah','name':'Kota Samarahan'},
+    {'ctgy':'area','state':'Sabah','name':'Puncak Borneo'},
+    {'ctgy':'area','state':'Sabah','name':'Serian'},
+    {'ctgy':'area','state':'Sabah','name':'Batang Sadong'},
+    {'ctgy':'area','state':'Sabah','name':'Batang Lupar'},
+    {'ctgy':'area','state':'Sabah','name':'Sri Aman'},
+    {'ctgy':'area','state':'Sabah','name':'Lubok Antu'},
+    {'ctgy':'area','state':'Sabah','name':'Betong'},
+    {'ctgy':'area','state':'Sabah','name':'Saratok'},
+    {'ctgy':'area','state':'Sabah','name':'Tanjong Manis'},
+    {'ctgy':'area','state':'Sabah','name':'Igan'},
+    {'ctgy':'area','state':'Sabah','name':'Sarikei'},
+    {'ctgy':'area','state':'Sabah','name':'Julau'},
+    {'ctgy':'area','state':'Sabah','name':'Kanowit'},
+    {'ctgy':'area','state':'Sabah','name':'Lanang'},
+    {'ctgy':'area','state':'Sabah','name':'Sibu'},
+    {'ctgy':'area','state':'Sabah','name':'Mukah'},
+    {'ctgy':'area','state':'Sabah','name':'Selangau'},
+    {'ctgy':'area','state':'Sabah','name':'Kapit'},
+    {'ctgy':'area','state':'Sabah','name':'Hulu Rajang'},
+    {'ctgy':'area','state':'Sabah','name':'Bintulu'},
+    {'ctgy':'area','state':'Sabah','name':'Sibuti'},
+    {'ctgy':'area','state':'Sabah','name':'Miri'},
+    {'ctgy':'area','state':'Sabah','name':'Baram'},
+    {'ctgy':'area','state':'Sabah','name':'Limbang'},
+    {'ctgy':'area','state':'Sabah','name':'Lawas'}
+
+  ];                
+            
+            
+            switch(option){
+              case "group": scope.userProfile.items=scope.userProfile.group; break;
+              case "level": scope.userProfile.items=scope.userProfile.level; break;  
+              case "state": scope.userProfile.items=scope.userProfile.state; break;    
+              case "area": scope.userProfile.items=scope.userProfile.area; break;    
+            }
+            $ionicModal.fromTemplateUrl('templates/modal.html', {
+              scope: scope
+            }).then(function(modal) {
+              scope.userProfile.modal = modal;
+              scope.userProfile.modal.show();
+            });
+            scope.userProfile.task.cancel = function() {
+              scope.userProfile.modal.hide();
+            scope.userProfile={};
+            }            
+            scope.userProfile.task.save = function() {
+              alert(angular.toJson(scope.userProfile.form))
+              scope.userProfile.modal.hide();
+            scope.userProfile={};              
+            }
+          };
+        });
+  </script>
+</body>
+</html>
